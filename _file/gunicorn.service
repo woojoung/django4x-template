@@ -1,0 +1,17 @@
+# /etc/systemd/system/gunicorn.service
+# $ sudo systemctl daemon-reload
+# $ sudo systemctl start gunicorn.service
+# $ virtualenv venv --python=python3.8
+# $ source venv/bin/activate
+
+[Unit]
+Description=gunicorn daemon
+After=network.target
+
+[Service]
+Environment="LD_LIBRARY_PATH=/usr/local/lib"
+WorkingDirectory=/home/ec2-user/GitHub/django4x-template/
+ExecStart=/home/ec2-user/GitHub/django4x-template/venv/bin/gunicorn project.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
